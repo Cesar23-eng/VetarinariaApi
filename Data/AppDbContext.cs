@@ -24,5 +24,7 @@ public class AppDbContext : DbContext
         // Esta entidad no tiene vista fija, se llena via SP, así que la definimos sin llave
         modelBuilder.Entity<ReporteAuditoria>().HasNoKey();
         modelBuilder.Entity<SeguimientoVisita>().HasNoKey().ToView("VW_SEGUIMIENTO_VISITAS");
+        modelBuilder.Entity<BonoVeterinario>().HasNoKey().ToView("VW_BONOS_VETERINARIO");
     }
+    public DbSet<BonoVeterinario> BonosVeterinarios { get; set; }
 }

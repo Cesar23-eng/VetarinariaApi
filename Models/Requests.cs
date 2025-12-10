@@ -1,9 +1,17 @@
 ﻿namespace VeterinariaApi.Models;
 
-// Para sp_RegistrarAdopcion
-public record AdopcionRequest(int IdMascota, int IdPostulante, decimal Pago);
+// ====================================================
+// ESTOS SON LOS DATOS QUE FLUTTER DEBE ENVIAR EN JSON
+// ====================================================
 
-// Para sp_RegistrarMascotaCliente
+// 1. Para Adopciones
+public record AdopcionRequest(
+    int IdMascota,
+    int IdPostulante,
+    decimal Pago
+);
+
+// 2. Para Mascotas (Cliente y Rescatada)
 public record MascotaClienteRequest(
     int IdCliente, 
     string Alias, 
@@ -15,7 +23,6 @@ public record MascotaClienteRequest(
     string Color
 );
 
-// Para sp_RegistrarRescatado
 public record MascotaRescatadaRequest(
     string Alias, 
     string Especie, 
@@ -26,7 +33,7 @@ public record MascotaRescatadaRequest(
     string Observaciones
 );
 
-// Para sp_RegistrarConsulta
+// 3. Para Clínica (Consultas y Vacunas)
 public record ConsultaMedicaRequest(
     int IdMascota,
     int IdVeterinario,
@@ -37,9 +44,14 @@ public record ConsultaMedicaRequest(
     bool EsBonificable
 );
 
-// ... (Mantén los records que ya tenías y agrega estos abajo)
+public record VacunaRequest(
+    int IdMascota,
+    int IdVacuna,
+    string Lote,
+    string Veterinario
+);
 
-// Para sp_RegistrarPostulante
+// 4. Para Gestión Diaria
 public record PostulanteRequest(
     string Nombre, 
     string Dni, 
@@ -49,7 +61,6 @@ public record PostulanteRequest(
     string Intereses
 );
 
-// Para sp_RegistrarAporte
 public record AporteRequest(
     int IdMecenas,
     int? IdMascota, // Puede ser null
@@ -58,7 +69,6 @@ public record AporteRequest(
     string Comprobante
 );
 
-// Para sp_RegistrarConsumoRefugio
 public record ConsumoRefugioRequest(
     int IdMascota,
     int IdServicio,
@@ -66,15 +76,7 @@ public record ConsumoRefugioRequest(
     string Observaciones
 );
 
-// Para sp_RegistrarVacunacion
-public record VacunaRequest(
-    int IdMascota,
-    int IdVacuna,
-    string Lote,
-    string Veterinario
-);
-
-// Para sp_RegistrarClienteFamilia (Crear nueva familia)
+// 5. Para Gestión de Familias y Peso
 public record ClienteFamiliaRequest(
     string ApellidoCabeza,
     string CuentaBancaria,
@@ -85,17 +87,15 @@ public record ClienteFamiliaRequest(
     string NombreCabeza
 );
 
-// Para sp_AgregarIntegrante (Agregar un hijo/abuelo a la familia)
 public record IntegranteRequest(
     int IdCliente,
     string NombreCompleto,
     string Dni,
-    string Rol // Ej: 'Hijo', 'Esposo'
+    string Rol 
 );
 
-// Para sp_ActualizarPeso (Historial de peso sin consulta médica)
 public record PesoRequest(
     int IdMascota,
     decimal NuevoPeso,
-    string EstadoNutricional // Ej: 'Obesidad', 'Normal'
+    string EstadoNutricional 
 );

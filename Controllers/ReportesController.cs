@@ -34,4 +34,18 @@ public class ReportesController(AppDbContext context) : ControllerBase
         var lista = await context.SeguimientoVisitas.ToListAsync();
         return Ok(lista);
     }
+    // 4. Reporte de Bonos a Pagar (Nuevo Requisito)
+    [HttpGet("pagos-bonificaciones")]
+    public async Task<IActionResult> GetBonos()
+    {
+        try
+        {
+            var reporte = await context.BonosVeterinarios.ToListAsync();
+            return Ok(reporte);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { error = "Error calculando bonos", detalle = ex.Message });
+        }
+    }
 }
